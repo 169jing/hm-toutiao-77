@@ -1,10 +1,12 @@
 <template>
-  <div id="app">apple</div>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style scode lang="less">
+<style scoped lang="less">
 </style>
