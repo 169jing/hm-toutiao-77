@@ -8,6 +8,8 @@ import Welcome from '@/views/welcome'
 
 import Article from '@/views/article'
 import Notfound from '@/views/404'
+
+import store from '@/store'
 // 使用router插件
 Vue.use(VueRouter)
 // 创建router实例对象
@@ -16,7 +18,7 @@ const router = new VueRouter({
     { path: '/login', name: 'login', component: Login },
     {
       path: '/',
-      name: 'home',
+      // name: 'home',
       component: Home,
       children: [
         { path: '/', name: 'welcome', component: Welcome },
@@ -28,5 +30,17 @@ const router = new VueRouter({
     { path: '*', name: '404', component: Notfound }
 
   ]
+})
+
+// 前置导航守卫  来自vue文档
+router.beforeEach((to, from, next) => {
+  // 1 判断是不是登录路由 是 放行
+  // if (to.path === '/login') return next()
+  // 2 判断是否登录 （有token值） 不是登录 去到登录页
+  // if (!store.getUser().token) return next('/login')
+  // 3 以上两种情况都不是  直接放行
+  // next()
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
 })
 export default router

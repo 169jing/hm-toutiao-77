@@ -9,7 +9,7 @@ export default {
     window.sessionStorage.setItem(KEY, JSON.stringify(user))
   },
   // 获取用户信息从 sessionStrorage中
-  gitUser () {
-    return window.sessionStorage.girItem(KEY) || '{}'
+  getUser () {
+    return JSON.parse(window.sessionStorage.getItem(KEY) || '{}')
   }
 }

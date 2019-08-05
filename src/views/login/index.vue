@@ -18,7 +18,7 @@
           <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button @click="login" type="primary" style="width: 100% ">登录</el-button>
+          <el-button @click.native="login" type="primary" style="width: 100% ">登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -40,8 +40,8 @@ export default {
     // 绘制表单依赖的数据
     return {
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '15703484001',
+        code: '246810'
       },
       // 表单效验规则数据
       loginRules: {
@@ -70,7 +70,7 @@ export default {
             )
             // res 响应对象  响应主体
             .then(res => {
-              console.log(res.data)
+              // console.log(res.data)
 
               // 存储用户信息
               store.setUser(res.data.data)
