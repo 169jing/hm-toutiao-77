@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     // 自定义效验规则 声明效验函数 在return之前 element-ui提供
@@ -67,9 +68,12 @@ export default {
               'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
               this.loginForm
             )
-            // res 响应对象  响应主题
+            // res 响应对象  响应主体
             .then(res => {
               console.log(res.data)
+
+              // 存储用户信息
+              store.setUser(res.data.data)
               // 登录成功跳转去首页
               this.$router.push('/')
             })
