@@ -26,6 +26,7 @@
 </template>
 
 <script>
+// import axios from 'axios'
 import store from '@/store'
 export default {
   data () {
@@ -58,20 +59,18 @@ export default {
   },
   methods: {
     login () {
-      // 对整个表单进行效验  调用form 组件提供的方法 validate
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          // alert('效验success')
-          // 请求登录接口
-          this.$http
+      // 对整个表单进行效验  调用element-ui中 form 表单组件提供的方法 validate
+      // this.$refs.loginForm.validate(async valid => {
+      // if (valid) {
+      // alert('效验success')
+      // 请求登录接口
+      /* this.$http
             .post(
               'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
               this.loginForm
             )
             // res 响应对象  响应主体
             .then(res => {
-              // console.log(res.data)
-
               // 存储用户信息
               store.setUser(res.data.data)
               // 登录成功跳转去首页
@@ -81,7 +80,21 @@ export default {
             .catch(() => {
               // 错误提示  Element-UI消息提示 提供
               this.$message.error('手机号或验证码错误')
-            })
+            }) */
+      this.$refs.loginForm.validate(async valid => {
+        if (valid) {
+          try {
+            const {
+              data: { data }
+            } = await this.$http.post(
+              'authorizations',
+              this.loginForm
+            )
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }
