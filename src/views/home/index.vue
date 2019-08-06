@@ -49,32 +49,54 @@
         <span class="text">江苏传智播客科技教育有限公司</span>
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
-            <img src="../../assets/images/avatar.jpg" alt />
-            有想法
+            <img :src="photo" alt />
+            {{name}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人设置</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-lock" @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
-      <router-view></router-view>
+      <el-main>
+        <!-- 二级路由的出口，显示组件位置 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
       // 控制展开收起
-      isCollapse: false
+
+      isCollapse: false,
+      // 用一个数据 必须提前申明数据
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    // 本地获取用户信息
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    setting () {
+      // this.$router.push({ name: 'article' })
+      this.$router.push('/setting')
+    },
+    logout () {
+      store.clearUser()
+      this.$router.push('/login')
     }
   }
 }
