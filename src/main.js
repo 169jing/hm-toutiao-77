@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+
+// 组件库  相当于（插件）
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //  @ 是某一个路径别名 src路径别名 在vue-cli创建的项目下才可使用
@@ -7,6 +9,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from '@/router'
 import '@/style/index.less'
 import axios from '@/api'
+
+// 自己插件使用
+import myCom from '@/components'
+Vue.use(myCom)
+
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
 
