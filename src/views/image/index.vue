@@ -36,7 +36,9 @@
         @current-change="changePager"
       ></el-pagination>
     </el-card>
+    <!-- 提示框 -->
     <el-dialog title="提示" :visible.sync="dialogVisible" width="300px">
+      <!-- 上传图片 -->
       <el-upload
         class="avatar-uploader"
         action="http://ttapi.research.itcast.cn/mp/v1_0/user/images"
@@ -112,7 +114,7 @@ export default {
       // 更新当前图片状态
       item.is_collected = data.collect
     },
-    // 上传成功组件
+    //  成功上传图片
     handleSuccess (res) {
       // 1获取图片地址显示在img标签上
       // console.log(res)
